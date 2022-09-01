@@ -1,7 +1,11 @@
+import { AuthProvider } from "./auth/context/AuthProvider"
+import AppRouter from "./router/AppRouter"
 
 const Challenge = () => {
   return (
-    <div>Challenge</div>
+    <AuthProvider>
+      <AppRouter/>
+    </AuthProvider>
   )
 }
 
