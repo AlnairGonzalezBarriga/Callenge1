@@ -3,7 +3,9 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 
 import { Navbar } from '../../ui/components/Navbar'
 import {AccountManage} from '../AccountManage'
-import {UserInfo} from '../UserInfo'
+import { ProfileScreen } from '../ProfileScreen'
+import { TeamHistory } from '../TeamHistory'
+import {TeamsManage} from '../TeamsManage'
 import {UserManage} from '../UserManage'
 
 export const OperationRouter = () => {
@@ -15,9 +17,11 @@ export const OperationRouter = () => {
     <div className='container'>
         <Routes>
             <Route path="accountManage" element={ <AccountManage /> } />
-            <Route path="userInfo" element={ <UserInfo /> } />
+            <Route path="teamsManage" element={ <TeamsManage /> } />
             <Route path="userManage" element={ <UserManage />} />
-            <Route path="/" element={<Navigate to="/userManage" />} />
+            <Route path="teamHistory" element={ <TeamHistory />} />
+            <Route path="profileScreen" element={ <ProfileScreen />} />
+            <Route path="/" element={<Navigate to="/profileScreen" />} />
         </Routes>
     </div>
     </>

@@ -1,17 +1,15 @@
 import React, { useContext } from 'react'
+
 import { AuthContext } from '../auth/context/AuthContext'
+import './styles/profileStyles.css'
 
-export const AccountManage = () => {
+export const ProfileScreen = () => {
 
-  const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
 
-  return (
-    <div class="container mt-3 mb-4">
-      <h2>Simple Collapsible</h2>
-      <p>Click on the button to toggle between showing and hiding content.</p>
-      <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#demo">Simple collapsible</button>
-      <div id="demo" class="collapse">
-      <div className="card profile-header">
+    return (
+        <div className="container profile-page mt-3 mb-4">
+            <div className="card profile-header">
                 <div className="body">
                     <div className="row">
                         <div className="col-lg-4 col-md-4 col-12">
@@ -28,7 +26,6 @@ export const AccountManage = () => {
                     </div>
                 </div>
             </div>
-      </div>
-    </div>
-  )
+        </div>
+    )
 }

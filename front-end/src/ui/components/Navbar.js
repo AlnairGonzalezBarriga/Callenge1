@@ -20,9 +20,9 @@ export const Navbar = () => {
             
             <Link 
                 className="navbar-brand" 
-                to="/accountManage"
+                to="/profileScreen"
             >
-                Administrar usuario
+                Perfil
             </Link>
 
             <div className="navbar-collapse">
@@ -30,23 +30,30 @@ export const Navbar = () => {
 
                     <NavLink 
                         className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
-                        to="/userManage"
+                        to="/accountManage"
                     >
-                        Administrar cuenta
+                        Cuentas
+                    </NavLink>
+
+                    {/* <NavLink 
+                        className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
+                        to="/teamsManage"
+                    >
+                        Equipos
+                    </NavLink> */}
+                    
+                    <NavLink 
+                        className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
+                        to="/teamHistory"
+                    >
+                        "Movimientos"
                     </NavLink>
 
                     <NavLink 
                         className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
-                        to="/userInfo"
+                        to="/userManage"
                     >
-                        Informacion usuario
-                    </NavLink>
-                    
-                    <NavLink 
-                        className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
-                        to="/search"
-                    >
-                        Search
+                        Usuarios
                     </NavLink>
                 </div>
             </div>
