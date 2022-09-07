@@ -11,7 +11,7 @@ export const TeamHistory = () => {
           </span>
         </div>
       </div>
-      <table className="table table-striped table-bordered table-hover table-light">
+      <table className="table table-striped table-bordered table-hover table-light mt-2">
         <thead>
           <tr>
             <th scope="col">#</th>

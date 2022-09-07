@@ -1,8 +1,14 @@
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useForm } from '../hooks/useForm';
 import { AuthContext } from './context/AuthContext';
 
 import './styles/loginStyles.css'
+
+const loginForm = {
+  loginEmail: '',
+  loginPassword: ''
+}
 
 const Login = () => {
 
@@ -11,11 +17,13 @@ const Login = () => {
 
   const onLogin = () => {
 
-    login('Alnair', 'Pirulas')
+    login('Alnair Gonzalez', 'Admin')
     navigate('/', {
       replace: true
     });
   }
+
+  const { loginEmail, loginPassword, onInputChange } = useForm( loginForm )
 
   return (
     <div className='container login-page mt-5'>
@@ -23,13 +31,25 @@ const Login = () => {
 
       <form>
         <div class="form-outline mb-4">
-          <input type="email" id="form2Example1" class="form-control" />
-          <label class="form-label" for="form2Example1">Email address</label>
+          <input 
+          type="email"  
+          class="form-control"
+          placeholder='Correo'
+          name='loginEmail'
+          value={ loginEmail }
+          onChange={ onInputChange }
+          />
         </div>
 
         <div class="form-outline mb-4">
-          <input type="password" id="form2Example2" class="form-control" />
-          <label class="form-label" for="form2Example2">Password</label>
+          <input 
+          type="password" 
+          class="form-control" 
+          placeholder='Contraseña'
+          name='loginPassword'
+          value={ loginPassword }
+          onChange={ onInputChange }
+          />
         </div>
 
         <div class="row mb-4">
