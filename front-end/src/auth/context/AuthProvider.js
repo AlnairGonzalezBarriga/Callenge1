@@ -18,9 +18,8 @@ export const AuthProvider = ({ children }) => {
 
   const [authState, dispatch] = useReducer(authReducer, {}, init);
 
-  const login = (name = '', role = '') => {
-
-    const user = { name, role }
+  const login = (name, password) => {
+    const user = { name, password }
     const action = { type: types.login, payload: user }
 
     localStorage.setItem('user', JSON.stringify(user))

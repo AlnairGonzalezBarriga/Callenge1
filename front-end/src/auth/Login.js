@@ -2,10 +2,10 @@ import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from '../hooks/useForm';
 import { AuthContext } from './context/AuthContext';
-import { startLogin } from '../actions/auth'
 import { useDispatch } from 'react-redux';
 
 import './styles/loginStyles.css'
+import { useAuthStore } from '../hooks/useAuthStore';
 
 const loginForm = {
   loginEmail: '',
@@ -14,16 +14,20 @@ const loginForm = {
 
 const Login = () => {
 
+  const dispatch = useDispatch();
+
+  const { startLogin } = useAuthStore()
+
   const { login } = useContext(AuthContext)
   const navigate = useNavigate();
 
   const onLogin = () => {
 
-    login(loginEmail, loginPassword)
+    /* login(loginEmail, loginPassword)
     navigate('/', {
       replace: true
-    });
-    // startLogin( 'alnair@gmail.com', '123456')     
+    }); */
+    startLogin( {email: loginEmail, password: loginPassword})     
   }
 
   const { loginEmail, loginPassword, onInputChange } = useForm( loginForm )
