@@ -54,7 +54,7 @@ const crearUsuario = async (req, res = response) => {
 const loginUsuario = async (req, res = response) => {
 
     const { email, role, password } = req.body
-
+    
     try {
 
         const usuario = await Usuario.findOne({ email })
@@ -101,7 +101,7 @@ const loginUsuario = async (req, res = response) => {
 }
 
 const revalidarToken = async(req, res = response) => {
-
+    
     const {uid, name, role} = req
     const token = await generarJWT( uid, name, role )
 

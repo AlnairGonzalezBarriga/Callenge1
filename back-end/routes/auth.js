@@ -19,7 +19,6 @@ router.post(
     '/',
     [
         check('email', 'El email es obligatorio').isEmail(),
-        check('role', 'El rol es obligatorio').not().isEmpty(),
         check('password', 'El password debe tener un minimo de 6 caracteres').isLength({ min:6 })
     ], 
     loginUsuario)

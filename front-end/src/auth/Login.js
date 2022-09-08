@@ -2,6 +2,8 @@ import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from '../hooks/useForm';
 import { AuthContext } from './context/AuthContext';
+import { startLogin } from '../actions/auth'
+import { useDispatch } from 'react-redux';
 
 import './styles/loginStyles.css'
 
@@ -17,10 +19,11 @@ const Login = () => {
 
   const onLogin = () => {
 
-    login('Alnair Gonzalez', 'Admin')
+    login(loginEmail, loginPassword)
     navigate('/', {
       replace: true
     });
+    // startLogin( 'alnair@gmail.com', '123456')     
   }
 
   const { loginEmail, loginPassword, onInputChange } = useForm( loginForm )
@@ -30,10 +33,10 @@ const Login = () => {
       <h1>Login</h1>
 
       <form>
-        <div class="form-outline mb-4">
+        <div className="form-outline mb-4">
           <input 
           type="email"  
-          class="form-control"
+          className="form-control"
           placeholder='Correo'
           name='loginEmail'
           value={ loginEmail }
@@ -41,10 +44,10 @@ const Login = () => {
           />
         </div>
 
-        <div class="form-outline mb-4">
+        <div className="form-outline mb-4">
           <input 
           type="password" 
-          class="form-control" 
+          className="form-control" 
           placeholder='Contraseña'
           name='loginPassword'
           value={ loginPassword }
@@ -52,20 +55,20 @@ const Login = () => {
           />
         </div>
 
-        <div class="row mb-4">
-          <div class="col d-flex justify-content-center">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="form2Example31" />
-              <label class="form-check-label" for="form2Example31"> Remember me </label>
+        <div className="row mb-4">
+          <div className="col d-flex justify-content-center">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="" id="form2Example31" />
+              <label className="form-check-label" for="form2Example31"> Remember me </label>
             </div>
           </div>
 
-          <div class="col">
+          <div className="col">
             <a href="#!">Forgot password?</a>
           </div>
         </div>
 
-        <button onClick={onLogin} type="button" class="btn btn-primary btn-block mb-4">Login</button>
+        <button onClick={onLogin} type="button" className="btn btn-primary btn-block mb-4">Login</button>
       </form>
     </div>
   )

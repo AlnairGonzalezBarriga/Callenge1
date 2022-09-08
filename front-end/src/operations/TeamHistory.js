@@ -3,11 +3,11 @@ import React from 'react'
 export const TeamHistory = () => {
   return (
     <div className='container mt-3 mb-4'>
-      <div class="input-group d-flex justify-content-end">
-        <div class="input-group rounded">
-          <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-          <span class="input-group-text border-0" id="search-addon">
-            <i class="fas fa-search"></i>
+      <div className="input-group d-flex justify-content-end">
+        <div className="input-group rounded">
+          <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+          <span className="input-group-text border-0" id="search-addon">
+            <i className="fas fa-search"></i>
           </span>
         </div>
       </div>
