@@ -1,8 +1,9 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from '../hooks/useForm';
 import { AuthContext } from './context/AuthContext';
 import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2'
 
 import './styles/loginStyles.css'
 import { useAuthStore } from '../hooks/useAuthStore';
@@ -16,7 +17,7 @@ const Login = () => {
 
   const dispatch = useDispatch();
 
-  const { startLogin } = useAuthStore()
+  const { startLogin, errorMessage } = useAuthStore()
 
   const { login } = useContext(AuthContext)
   const navigate = useNavigate();
@@ -24,11 +25,16 @@ const Login = () => {
   const onLogin = () => {
 
     /* login(loginEmail, loginPassword)
-    navigate('/', {
-      replace: true
-    }); */
+     */
     startLogin( {email: loginEmail, password: loginPassword})     
   }
+
+  useEffect(() => {
+    if(errorMessage !== undefined){
+      Swal.fire('Error de autenticacion', errorMessage, 'error')
+    }
+  }, [errorMessage])
+  
 
   const { loginEmail, loginPassword, onInputChange } = useForm( loginForm )
 

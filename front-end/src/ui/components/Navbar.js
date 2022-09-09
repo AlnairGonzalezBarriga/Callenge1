@@ -1,10 +1,12 @@
 import React, { useContext } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../auth/context/AuthContext';
+import { useAuthStore } from '../../hooks/useAuthStore';
 
 export const Navbar = () => {
 
-    const {user, logout} = useContext( AuthContext )
+    const {s, logout} = useContext( AuthContext )
+    const {startLogout, user} = useAuthStore()
 
     const navigate = useNavigate();
 
@@ -66,8 +68,8 @@ export const Navbar = () => {
                     </span>
 
                     <button
-                        className="nav-item nav-link btn"
-                        onClick={ onLogout }
+                        className="nav-item nav-link btn btn-outline-danger"
+                        onClick={ startLogout }
                     >
                         Logout
                     </button>

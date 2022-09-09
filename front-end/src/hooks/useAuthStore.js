@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
-import {challengeApi} from "../api/challengeApi"
-import { onChecking, onLogin, onLogout } from "../store/authSlice"
+import challengeApi from "../api/challengeApi"
+import { clearErrorMessage, onChecking, onLogin, onLogout } from "../store/authSlice"
 
 
 export const useAuthStore = () =>{
@@ -13,11 +13,35 @@ export const useAuthStore = () =>{
         try {
             const {data} = await challengeApi.post('/auth', {email, password} )
             localStorage.setItem('token', data.token)
-            dispatch( onLogin({ name: data.name, uid: data.uid }) )
+            localStorage.setItem('token-init-date', new Date().getTime())
+            dispatch( onLogin({ name: data.name, uid: data.uid, role: data.role }) )
 
         } catch (error) {
             dispatch( onLogout('Credenciales incorrectas') )
+            setTimeout(() =>{
+                dispatch( clearErrorMessage() )
+            }, 10)
         }
+    }
+
+    const checkAuthToken = async() =>{
+        const token = localStorage.getItem('token')
+        if( !token ) return dispatch(onLogout())
+
+        try {
+            const {data} = await challengeApi.get('auth/renew')
+            localStorage.setItem('token', data.token)
+            localStorage.setItem('token-init-date', new Date().getTime())
+            dispatch( onLogin({ name: data.name, uid: data.uid, role: data.role }) )
+        } catch (error) {
+            localStorage.clear()
+            dispatch(onLogout())
+        }
+    }
+
+    const startLogout = () =>{
+        localStorage.clear()
+        dispatch(onLogout())
     }
 
     return{
@@ -27,6 +51,8 @@ export const useAuthStore = () =>{
         user,
 
         //Metodos
+        checkAuthToken,
         startLogin,
+        startLogout
     }
 }
