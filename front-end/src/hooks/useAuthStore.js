@@ -24,6 +24,15 @@ export const useAuthStore = () =>{
         }
     }
 
+    const startRegister = async({email, password, name, role}) =>{
+        dispatch( onChecking() )
+        try {
+            await challengeApi.post('/auth/new', {email, password, name, role} )
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     const checkAuthToken = async() =>{
         const token = localStorage.getItem('token')
         if( !token ) return dispatch(onLogout())
@@ -53,6 +62,7 @@ export const useAuthStore = () =>{
         //Metodos
         checkAuthToken,
         startLogin,
-        startLogout
+        startLogout,
+        startRegister
     }
 }

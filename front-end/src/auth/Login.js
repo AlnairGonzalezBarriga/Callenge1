@@ -17,7 +17,7 @@ const Login = () => {
 
   const dispatch = useDispatch();
 
-  const { startLogin, errorMessage } = useAuthStore()
+  const { startLogin, errorMessage, startRegister } = useAuthStore()
 
   const { login } = useContext(AuthContext)
   const navigate = useNavigate();
@@ -26,7 +26,8 @@ const Login = () => {
 
     /* login(loginEmail, loginPassword)
      */
-    startLogin( {email: loginEmail, password: loginPassword})     
+    /* startLogin( {email: loginEmail, password: loginPassword})  */
+    startRegister( {email: loginEmail, password: loginPassword, name: 'Manolo', role: 'gerente'})  
   }
 
   useEffect(() => {

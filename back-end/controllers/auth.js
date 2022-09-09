@@ -115,8 +115,91 @@ const revalidarToken = async(req, res = response) => {
     })
 }
 
+const getUsers = async(req, res = response) => {
+
+    const users = await Usuario.find();
+
+    res.json({
+        ok: true,
+        users
+    })
+}
+
+const updateUsers = async(req, res = response) => {
+
+    const userId = req.params.id
+
+    try {
+        
+        const usuario = await Usuario.findById( userId )
+
+        if( !usuario ){
+            return res.status(404).json({
+                ok: false,
+                msg: 'No existe ese usuario' 
+            })
+        }
+
+        const { password } = req.body
+        const salt = bcrypt.genSaltSync()
+        req.body.password = bcrypt.hashSync(password, salt)
+
+        const nuevoUsuario = {
+            ...req.body
+        }
+
+        const usuarioActualizado = await Usuario.findByIdAndUpdate( userId, nuevoUsuario, {new: true } )
+
+        res.json({
+            ok: true,
+            users: usuarioActualizado
+        })
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        })
+    }
+
+}
+
+const deleteUsers = async(req, res = response) => {
+
+    const userId = req.params.id
+
+    try {
+        
+        const usuario = await Usuario.findById( userId )
+
+        if( !usuario ){
+            return res.status(404).json({
+                ok: false,
+                msg: 'No existe ese usuario' 
+            })
+        }
+
+        await Usuario.findByIdAndDelete( userId )
+
+        res.json({
+            ok: true
+        })
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        })
+    }
+}
+
 module.exports = {
     crearUsuario,
     loginUsuario,
-    revalidarToken
+    revalidarToken,
+    getUsers,
+    updateUsers,
+    deleteUsers
 }
