@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useAuthStore } from '../hooks/useAuthStore'
 
 import './styles/userStyle.css'
 
 export const UserManage = () => {
+
+  const { startLoadingUsers, startDeleting, startUpdate } = useAuthStore();
+
+  useEffect(() => {
+    startLoadingUsers()
+    //startDeleting()
+    //startUpdate( {email: 'miguel@gmail.com', password: '123456', name: 'Miguel', role: 'gerente'})  
+  }, [])
+  
+
   return (
     <div className="container mt-3 mb-4 user-page">
       <div className="row">
