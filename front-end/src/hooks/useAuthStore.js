@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import challengeApi from "../api/challengeApi"
 import { clearErrorMessage, onChecking, onLogin, onLogout } from "../store/authSlice"
-import { onLoadUsers, onLogoutUsers, onSetActiveUser, onStartUpdate, onEndUpdate } from '../store/userSlice'
+import { onLoadUsers, onLogoutUsers, onSetActiveUser, onStartUpdate, onEndUpdate, onCreateUser } from '../store/userSlice'
 
 
 export const useAuthStore = () => {
@@ -65,10 +65,10 @@ export const useAuthStore = () => {
         }
     }
 
-    const startUpdate = async ({ email, password, name, role }, userId) => {
+    const startUpdate = async (user, userId) => {
         if (isUpdating === true) {
             try {
-                await challengeApi.put((`/auth/${userId}`), { email, password, name, role })
+                await challengeApi.put((`/auth/${userId}`), user)
                 dispatch(onEndUpdate())
                 return;
             } catch (error) {
@@ -76,7 +76,7 @@ export const useAuthStore = () => {
             }
         } else {
             try {
-                await challengeApi.post('/auth/new', { email, password, name, role })
+                await challengeApi.post('/auth/new', user)
             } catch (error) {
                 console.log(error)
             }
