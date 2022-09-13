@@ -8,21 +8,24 @@ export const userSlice = createSlice({
         activeUser: null,
     },
     reducers: {
-        onLoadUsers: (state, { payload = [] }) =>{
+        onLoadUsers: (state, { payload = [] }) => {
             state.loadStatus = false;
-            payload.forEach(user => {            
-                const exists = state.users.some( dbUser => dbUser._id === user._id )
-                if( !exists ){
-                    state.users.push( user )                    
-                }            
+            payload.forEach(user => {
+                const exists = state.users.some(dbUser => dbUser._id === user._id)
+                if (!exists) {
+                    state.users.push(user)
+                }
             });
         },
-        onLogoutUsers: (state) =>{
+        onLogoutUsers: (state) => {
             state.loadStatus = true
             state.users = []
             state.activeUser = null
         },
+        onSetActiveUser: (state, payload) => {
+            state.activeUser = payload
+        },
     }
 })
 
-export const { onLoadUsers, onLogoutUsers } = userSlice.actions;
+export const { onLoadUsers, onLogoutUsers, onSetActiveUser } = userSlice.actions;

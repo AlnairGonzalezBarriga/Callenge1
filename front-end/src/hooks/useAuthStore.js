@@ -1,17 +1,18 @@
 import { useDispatch, useSelector } from "react-redux"
 import challengeApi from "../api/challengeApi"
 import { clearErrorMessage, onChecking, onLogin, onLogout } from "../store/authSlice"
-import { onLoadUsers, onLogoutUsers } from '../store/userSlice'
+import { onLoadUsers, onLogoutUsers, onSetActiveUser } from '../store/userSlice'
 
 
 export const useAuthStore = () => {
 
     const { status, user, errorMessage } = useSelector(state => state.auth)
+    const { users, activeUser } = useSelector(state => state.users)
     const dispatch = useDispatch()
 
     const startLogin = async ({ email, password }) => {
         dispatch(onChecking())
-        try {            
+        try {
             const { data } = await challengeApi.post('/auth', { email, password })
             localStorage.setItem('token', data.token)
             localStorage.setItem('token-init-date', new Date().getTime())
@@ -55,7 +56,7 @@ export const useAuthStore = () => {
         dispatch(onLogout())
     }
 
-    const startLoadingUsers = async() => {
+    const startLoadingUsers = async () => {
         try {
             const { data } = await challengeApi.get('/auth/users')
             const users = data.users
@@ -68,14 +69,13 @@ export const useAuthStore = () => {
     const startUpdate = async ({ email, password, name, role }) => {
         try {
             await challengeApi.put((`/auth/${'631f8bd36f3c5c813ce4b435'}`), { email, password, name, role })
-            console.log('aqui andamios')
             return;
         } catch (error) {
             console.log(error)
         }
     }
 
-    const startDeleting = async() => {
+    const startDeleting = async () => {
         try {
             await challengeApi.delete((`/auth/${'aqui va el id'}`))
         } catch (error) {
@@ -84,11 +84,17 @@ export const useAuthStore = () => {
 
     }
 
+    const setActiveUser = ( activeUser ) => {
+        dispatch( onSetActiveUser(activeUser) )
+    }
+
     return {
         //Propiedades
         errorMessage,
         status,
         user,
+        users,
+        activeUser,
 
         //Metodos
         checkAuthToken,
@@ -97,6 +103,7 @@ export const useAuthStore = () => {
         startRegister,
         startLoadingUsers,
         startUpdate,
-        startDeleting
+        startDeleting,
+        setActiveUser
     }
 }
