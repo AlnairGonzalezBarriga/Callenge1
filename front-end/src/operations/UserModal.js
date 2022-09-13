@@ -23,38 +23,39 @@ export const UserModal = () => {
 
     const { isModalOpen, closeModal } = useUiStore()
 
-    const { activeUser } = useAuthStore()
+    const { activeUser, startRegister, startUpdate } = useAuthStore()
 
     const [formValues, setFormValues] = useState({
         name: 'Alnair Gonzalez',
         email: 'alnair@gmail.com',
-        password: '123456'
+        password: '123456',
+        role: 'admin'
     })
 
     const onCloseModal = () => {
-        console.log('cerrando modal')
         closeModal()
     }
 
-    const onInputChange = ({ target }) =>{
+    const onInputChange = ({ target }) => {
         setFormValues({
             ...formValues,
             [target.name]: target.value,
         })
     }
 
-    const onSubmit = (event) =>{
+    const onSubmit = (event) => {
         event.preventDefault()
-        console.log(formValues)
+        startUpdate(formValues, activeUser.payload._id)
+        closeModal()
     }
 
     useEffect(() => {
-        if( activeUser !== null){
+        if (activeUser !== null) {
             setFormValues({ ...activeUser.payload })
         }
-      
+
     }, [activeUser])
-    
+
 
     return (
         <Modal
@@ -80,7 +81,7 @@ export const UserModal = () => {
                                             placeholder='Nombre'
                                             name='name'
                                             value={formValues.name}
-                                            onChange = {onInputChange}
+                                            onChange={onInputChange}
                                         />
                                     </div>
                                     <div class="row">
@@ -92,7 +93,7 @@ export const UserModal = () => {
                                                 placeholder='email'
                                                 name='email'
                                                 value={formValues.email}
-                                                onChange = {onInputChange}
+                                                onChange={onInputChange}
                                             />
 
                                         </div>
@@ -101,20 +102,21 @@ export const UserModal = () => {
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Contraseña</label>
                                             <input
-                                                type="password"
+                                                type="text"
                                                 class="form-control"
                                                 placeholder='password'
                                                 name='password'
                                                 value={formValues.password}
-                                                onChange = {onInputChange}
+                                                onChange={onInputChange}
                                             />
                                         </div>
                                     </div>
                                     <div class="mb-4">
+                                        <label class="form-label">Rol</label>
+                                        <br></br>
                                         <select class="select">
-                                            <option value="1" disabled>Rol</option>
-                                            <option value="2">Admin</option>
-                                            <option value="3">Usuario</option>
+                                            <option value="1">Admin</option>
+                                            <option value="2">Usuario</option>
                                         </select>
                                     </div>
                                     <div class="mb-md-5">

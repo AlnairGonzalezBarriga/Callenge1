@@ -6,6 +6,7 @@ export const userSlice = createSlice({
         loadStatus: true,
         users: [],
         activeUser: null,
+        isUpdating: false
     },
     reducers: {
         onLoadUsers: (state, { payload = [] }) => {
@@ -25,7 +26,16 @@ export const userSlice = createSlice({
         onSetActiveUser: (state, payload) => {
             state.activeUser = payload
         },
+        onCreateUser: (state, {payload}) => {
+            state.activeUser = null
+        },
+        onStartUpdate: (state) => {
+            state.isUpdating = true
+        },
+        onEndUpdate: (state) => {
+            state.isUpdating = false
+        },
     }
 })
 
-export const { onLoadUsers, onLogoutUsers, onSetActiveUser } = userSlice.actions;
+export const { onLoadUsers, onLogoutUsers, onSetActiveUser, onCreateUser, onStartUpdate, onEndUpdate } = userSlice.actions;

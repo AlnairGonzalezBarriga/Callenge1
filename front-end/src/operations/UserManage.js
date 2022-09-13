@@ -9,21 +9,35 @@ export const UserManage = () => {
 
   const { openModal } = useUiStore()
 
-  const { startLoadingUsers, startDeleting, startUpdate, setActiveUser, users } = useAuthStore();
+  const { startLoadingUsers, startDeleting, startUpdate, setActiveUser, setUpdateStatus, users } = useAuthStore();
 
   useEffect(() => {
     startLoadingUsers()
-    //startDeleting()
     //startUpdate( {email: 'miguel@gmail.com', password: '123456', name: 'Miguel', role: 'gerente'})  
   }, [])
 
   const onSelect = (user) => {
+    setUpdateStatus()
     setActiveUser(user)
+  }
+
+  const onClickCreate = () => {
+    setActiveUser({
+      name: '',
+      email: '',
+      password: '',
+      role: 'admin'
+    })
+    openModal()
+  }
+
+  const onClickDelete = (userId) => {
+    startDeleting(userId)
   }
 
   return (
     <div className="container mt-3 mb-4 user-page">
-      <button onClick={openModal}>abrir modal</button>
+      <button onClick={() => { onClickCreate() }}>abrir modal</button>
       <div className="row">
         <div className="col-md-12">
           <div className="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm">
@@ -63,11 +77,12 @@ export const UserManage = () => {
                           }}>
                             <i className="fas fa-eye text-primary"></i></button></li>
                           <li><button type="button" className='btn bg-transparent' onClick={() => {
+                            openModal()
                             onSelect(element)
                           }}>
                             <i className="fas fa-pencil-alt text-info"></i></button></li>
                           <li><button type="button" className='btn bg-transparent' onClick={() => {
-                            onSelect(element)
+                            onClickDelete(element._id)
                           }}>
                             <i className="far fa-trash-alt text-danger"></i></button></li>
                         </ul>
