@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useAuthStore } from '../hooks/useAuthStore'
 
 import './styles/userStyle.css'
 
 export const TeamsManage = () => {
+
+  const { startLoadingUsers, users } = useAuthStore();
+
+  useEffect(() => {
+    startLoadingUsers()
+  }, [])
+
   return (
     <div className="container profile-page mt-3 mb-4 user-page">
       <div className="accordion accordion-flush" id="accordionFlushExample">
@@ -17,40 +25,52 @@ export const TeamsManage = () => {
             </button>
           </h2>
           <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-            <table className="table table-striped table-bordered table-hover table-light mt-2">
+
+            <table className="table manage-candidates-top mb-0">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Equipo</th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Fecha de Entrada</th>
-                  <th scope="col">Fecha de Salida</th>
+                  <th>Candidate Name</th>
+                  <th className="action text-right">Action</th>
+                  <th className="action text-right">
+                    <button type='button' className='btn btn-primary rounded-circle'><i class="fa fa-plus"></i></button>
+                  </th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Martin González</td>
-                  <td>02/09/22</td>
-                  <td>05/09/22</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Hugo Chavez</td>
-                  <td>02/09/22</td>
-                  <td>05/09/22</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Manuel</td>
-                  <td>Javier Martinez</td>
-                  <td>02/09/22</td>
-                  <td>05/09/22</td>
-                </tr>
-              </tbody>
+              {users.map(function (element, index) {
+                return (
+                  <tbody>
+                    <tr className="candidates-list">
+                      <td className="title">
+                        <div className="candidate-list-details">
+                          <div className="candidate-list-info">
+                            <div className="candidate-list-title">
+                              <h5 className="mb-0">{element.name}</h5>
+                            </div>
+                            <div className="candidate-list-option">
+                              <ul className="list-unstyled">
+                                <li><i className="fa fa-envelope pr-1"></i>{element.email}</li>
+                                <li><i className="fa fa-address-book pr-1"></i><a href='#'>CV</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="candidate-list-favourite-time text-center">
+                        <ul className="list-unstyled mb-0 d-flex">
+                          <li><button type="button" className='btn bg-transparent' onClick={() => {
+                          }}>
+                            <i className="fas fa-eye text-primary"></i></button></li>
+                          <li><button type="button" className='btn bg-transparent' onClick={() => {
+                          }}>
+                            <i className="far fa-trash-alt text-danger"></i></button></li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                )
+              })}
             </table>
+
             <br></br>
           </div>
         </div>
@@ -66,40 +86,52 @@ export const TeamsManage = () => {
             </button>
           </h2>
           <div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExampleTwo">
-            <table className="table table-striped table-bordered table-hover table-light mt-2">
+
+            <table className="table manage-candidates-top mb-0">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Equipo</th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Fecha de Entrada</th>
-                  <th scope="col">Fecha de Salida</th>
+                  <th>Candidate Name</th>
+                  <th className="action text-right">Action</th>
+                  <th className="action text-right">
+                    <button type='button' className='btn btn-primary rounded-circle'><i class="fa fa-plus"></i></button>
+                  </th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Martin González</td>
-                  <td>02/09/22</td>
-                  <td>05/09/22</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Hugo Chavez</td>
-                  <td>02/09/22</td>
-                  <td>05/09/22</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Manuel</td>
-                  <td>Javier Martinez</td>
-                  <td>02/09/22</td>
-                  <td>05/09/22</td>
-                </tr>
-              </tbody>
+              {users.map(function (element, index) {
+                return (
+                  <tbody>
+                    <tr className="candidates-list">
+                      <td className="title">
+                        <div className="candidate-list-details">
+                          <div className="candidate-list-info">
+                            <div className="candidate-list-title">
+                              <h5 className="mb-0">{element.name}</h5>
+                            </div>
+                            <div className="candidate-list-option">
+                              <ul className="list-unstyled">
+                                <li><i className="fa fa-envelope pr-1"></i>{element.email}</li>
+                                <li><i className="fa fa-address-book pr-1"></i><a href='#'>CV</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="candidate-list-favourite-time text-center">
+                        <ul className="list-unstyled mb-0 d-flex">
+                          <li><button type="button" className='btn bg-transparent' onClick={() => {
+                          }}>
+                            <i className="fas fa-eye text-primary"></i></button></li>
+                          <li><button type="button" className='btn bg-transparent' onClick={() => {
+                          }}>
+                            <i className="far fa-trash-alt text-danger"></i></button></li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                )
+              })}
             </table>
+
             <br></br>
           </div>
         </div>
