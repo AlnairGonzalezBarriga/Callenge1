@@ -37,7 +37,6 @@ export const UserManage = () => {
 
   return (
     <div className="container mt-3 mb-4 user-page">
-      <button onClick={() => { onClickCreate() }}>abrir modal</button>
       <div className="row">
         <div className="col-md-12">
           <div className="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm">
@@ -46,6 +45,9 @@ export const UserManage = () => {
                 <tr>
                   <th>Candidate Name</th>
                   <th className="action text-right">Action</th>
+                  <th className="action text-right">
+                    <button type='button' className='btn btn-primary rounded-circle' onClick={() => { onClickCreate() }}><i class="fa fa-plus"></i></button>
+                  </th>
                 </tr>
               </thead>
               {users.map(function (element, index) {

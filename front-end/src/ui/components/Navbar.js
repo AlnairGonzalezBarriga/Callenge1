@@ -1,21 +1,10 @@
-import React, { useContext } from 'react'
-import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../auth/context/AuthContext';
+import React from 'react'
+import { Link, NavLink } from 'react-router-dom';
 import { useAuthStore } from '../../hooks/useAuthStore';
 
 export const Navbar = () => {
 
-    const {s, logout} = useContext( AuthContext )
     const {startLogout, user} = useAuthStore()
-
-    const navigate = useNavigate();
-
-    const onLogout = () => {
-        logout();
-        navigate('/login', {
-            replace: true
-        });
-    }
 
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark p-2">
@@ -37,12 +26,12 @@ export const Navbar = () => {
                         Cuentas
                     </NavLink>
 
-                    {/* <NavLink 
+                    <NavLink 
                         className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
                         to="/teamsManage"
                     >
                         Equipos
-                    </NavLink> */}
+                    </NavLink>
                     
                     <NavLink 
                         className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }

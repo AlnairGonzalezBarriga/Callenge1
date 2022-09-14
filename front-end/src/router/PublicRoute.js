@@ -21,5 +21,5 @@ export const PublicRoute = ({children}) => {
 
     return (status === 'not-authenticated')
     ? children
-    : <Navigate to="/accountManage"/>
+    : <Navigate to="/userManage"/>
 }

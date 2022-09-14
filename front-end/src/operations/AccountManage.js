@@ -1,13 +1,14 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../auth/context/AuthContext'
 
+import './styles/userStyle.css'
 
 export const AccountManage = () => {
 
   const { user } = useContext(AuthContext)
 
   return (
-    <div className="container profile-page mt-3 mb-4">
+    <div className="container profile-page mt-3 mb-4 user-page">
       <div className="accordion accordion-flush" id="accordionFlushExample">
         <div className="accordion-item">
           <h2 className="accordion-header" id="flush-headingOne">

@@ -111,7 +111,7 @@ export const UserModal = () => {
                                             />
                                         </div>
                                     </div>
-                                    <div class="mb-4">
+                                    <div class="mb-md-5">
                                         <label class="form-label">Rol</label>
                                         <br></br>
                                         <select class="select">
