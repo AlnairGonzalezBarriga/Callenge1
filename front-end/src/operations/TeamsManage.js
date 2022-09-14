@@ -49,7 +49,6 @@ export const TeamsManage = () => {
                             <div className="candidate-list-option">
                               <ul className="list-unstyled">
                                 <li><i className="fa fa-envelope pr-1"></i>{element.email}</li>
-                                <li><i className="fa fa-address-book pr-1"></i><a href='#'>CV</a></li>
                               </ul>
                             </div>
                           </div>
@@ -110,7 +109,6 @@ export const TeamsManage = () => {
                             <div className="candidate-list-option">
                               <ul className="list-unstyled">
                                 <li><i className="fa fa-envelope pr-1"></i>{element.email}</li>
-                                <li><i className="fa fa-address-book pr-1"></i><a href='#'>CV</a></li>
                               </ul>
                             </div>
                           </div>
