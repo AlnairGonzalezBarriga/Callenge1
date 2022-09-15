@@ -30,13 +30,7 @@ router.put('/:id',
 
 router.delete('/:id', deleteTeam)
 
-router.put('/addTeamMember/:id',
-    [
-        check('teamName', 'El nombre del equipo es obligatorio').not().isEmpty(),
-        check('accountName', 'El nombre cuenta es obligatorio').not().isEmpty(),
-        validarCampos
-    ],
-    addTeamMember)
+router.put('/addTeamMember/:id', addTeamMember)
 
 router.put('/deleteTeamMember/:id', deleteTeamMember)
 

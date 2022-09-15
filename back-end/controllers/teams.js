@@ -104,6 +104,7 @@ const deleteTeam = async (req, res = response) => {
 const addTeamMember = async (req, res = response) => {
 
     const teamId = req.params.id
+    const addId = req.body.addId
 
     try {
 
@@ -118,7 +119,7 @@ const addTeamMember = async (req, res = response) => {
 
         const teamActualizado = await Team.findByIdAndUpdate( teamId, 
             { $push: { teamMembers : { 
-                  "memberId" : req.uid
+                  "memberId" : addId
               }  } }, 
             {new: true} )
 
@@ -139,6 +140,7 @@ const addTeamMember = async (req, res = response) => {
 const deleteTeamMember = async (req, res = response) => {
 
     const teamId = req.params.id
+    const deleteId = req.body.deleteId
 
     try {
 
@@ -153,7 +155,7 @@ const deleteTeamMember = async (req, res = response) => {
 
         const teamActualizado = await Team.findByIdAndUpdate( teamId, 
             { $pull: { teamMembers : { 
-                  "memberId" : req.uid
+                  "memberId" : deleteId
               }  } }, 
             {new: true} )
 
