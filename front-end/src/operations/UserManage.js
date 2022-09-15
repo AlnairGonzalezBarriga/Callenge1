@@ -12,8 +12,7 @@ export const UserManage = () => {
   const { startLoadingUsers, startDeleting, startUpdate, setActiveUser, setUpdateStatus, users } = useAuthStore();
 
   useEffect(() => {
-    startLoadingUsers()
-    //startUpdate( {email: 'miguel@gmail.com', password: '123456', name: 'Miguel', role: 'gerente'})  
+    startLoadingUsers()    
   }, [])
 
   const onSelect = (user) => {

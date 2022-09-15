@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react'
 import { useAuthStore } from '../hooks/useAuthStore'
+import { useTeamStore } from '../hooks/useTeamStore';
 
 import './styles/userStyle.css'
 
 export const TeamsManage = () => {
 
   const { startLoadingUsers, users } = useAuthStore();
+  const { startLoadingTeams } = useTeamStore();
 
   useEffect(() => {
+    startLoadingTeams()
     startLoadingUsers()
   }, [])
 
