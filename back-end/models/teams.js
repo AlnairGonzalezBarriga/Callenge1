@@ -2,22 +2,25 @@ const { Schema, model } = require('mongoose')
 
 const TeamSchema = Schema({
 
-    teamName:{
+    teamName: {
         type: String,
-        require: true
+        required: true
     },
-    accountName:{
+    accountName: {
         type: String,
-        require: true
+        required: true
     },
-    leaderName:{
+    leaderName: {
         type: String,
-        require: true
+        required: true
     },
-    teamMembers : [{
-        type: Schema.Types.ObjectId,
-        ref: 'Usuario'
+    teamMembers: [{
+        memberId: {
+            type: Schema.Types.ObjectId,
+            ref: 'Usuario',
+            required: true
+        }
     }]
 })
 
-module.exports = model( 'Team', TeamSchema )
+module.exports = model('Team', TeamSchema)
