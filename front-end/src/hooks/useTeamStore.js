@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import challengeApi from "../api/challengeApi"
+import Swal from 'sweetalert2'
 
 import { onEndUpdate, onLoadTeams, onSetActiveTeam } from "../store/teamSlice"
 
@@ -30,6 +31,7 @@ export const useTeamStore = () => {
         } else {
             try {
                 await challengeApi.post('/teams', team)
+                Swal.fire({icon: 'success', title: 'Equipo creado con exito'})
             } catch (error) {
                 console.log(error)
             }
@@ -39,6 +41,7 @@ export const useTeamStore = () => {
     const startDeleting = async (userId) => {
         try {
             await challengeApi.delete((`/teams/${userId}`))
+            Swal.fire({icon: 'success', title: 'Equipo eliminado con exito'})
         } catch (error) {
             console.log(error)
         }

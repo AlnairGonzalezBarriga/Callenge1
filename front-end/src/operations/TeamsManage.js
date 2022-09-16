@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import Swal from 'sweetalert2'
 import { useTeamStore } from '../hooks/useTeamStore';
 import { useUiStore } from '../hooks/useUiStore';
 
@@ -24,7 +25,21 @@ export const TeamsManage = () => {
   }
 
   const onClickDelete = (userId) => {
-    startDeleting(userId)
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',      
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        startDeleting(userId)
+      }
+    })
   }
 
   return (
