@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose')
 
 const TeamSchema = Schema({
 
-    teamName: {
+    teamClient: {
         type: String,
         required: true
     },

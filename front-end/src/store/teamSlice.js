@@ -19,7 +19,20 @@ export const teamSlice = createSlice({
                 }
             });
         },
+        onSetActiveTeam: (state, payload) => {
+            state.activeTeam = payload
+        },
+        onCreateUser: (state, {payload}) => {
+            state.teams.push = payload
+            state.activeTeam = null
+        },
+        onStartUpdate: (state) => {
+            state.isUpdating = true
+        },
+        onEndUpdate: (state) => {
+            state.isUpdating = false
+        },
     }
 })
 
-export const { onLoadTeams } = teamSlice.actions;
+export const { onLoadTeams, onSetActiveTeam, onStartUpdate, onEndUpdate } = teamSlice.actions;

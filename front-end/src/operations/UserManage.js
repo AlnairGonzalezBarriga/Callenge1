@@ -45,7 +45,7 @@ export const UserManage = () => {
                   <th>Candidate Name</th>
                   <th className="action text-right">Action</th>
                   <th className="action text-right">
-                    <button type='button' className='btn btn-primary rounded-circle' onClick={() => { onClickCreate() }}><i class="fa fa-plus"></i></button>
+                    <button type='button' className='btn btn-primary rounded-circle' onClick={() => { onClickCreate() }}><i className="fa fa-plus"></i></button>
                   </th>
                 </tr>
               </thead>

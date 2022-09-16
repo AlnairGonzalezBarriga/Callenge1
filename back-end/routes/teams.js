@@ -14,7 +14,7 @@ router.get('/', getTeams)
 router.post(
     '/',
     [
-        check('teamName', 'El nombre del equipo es obligatorio').not().isEmpty(),
+        check('teamClient', 'El nombre del equipo es obligatorio').not().isEmpty(),
         check('accountName', 'El nombre cuenta es obligatorio').not().isEmpty(),
         validarCampos
     ],
@@ -22,7 +22,7 @@ router.post(
 
 router.put('/:id',
     [
-        check('teamName', 'El nombre del equipo es obligatorio').not().isEmpty(),
+        check('teamClient', 'El nombre del equipo es obligatorio').not().isEmpty(),
         check('accountName', 'El nombre cuenta es obligatorio').not().isEmpty(),
         validarCampos
     ],
