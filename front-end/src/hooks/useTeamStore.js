@@ -28,13 +28,21 @@ export const useTeamStore = () => {
                 console.log(error)
             } */
         } else {
-            console.log('Creando desde teamStore')
             try {
                 await challengeApi.post('/teams', team)
             } catch (error) {
                 console.log(error)
             }
         }
+    }
+
+    const startDeleting = async (userId) => {
+        try {
+            await challengeApi.delete((`/teams/${userId}`))
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 
     const setActiveTeam = (activeTeam) => {
@@ -49,6 +57,7 @@ export const useTeamStore = () => {
         //Metodos
         startLoadingTeams,
         startUpload,
+        startDeleting,
         setActiveTeam
 
     }

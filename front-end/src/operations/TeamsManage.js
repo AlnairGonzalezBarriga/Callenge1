@@ -7,12 +7,12 @@ import { TeamsModal } from './TeamsModal';
 
 export const TeamsManage = () => {
 
-  const { startLoadingTeams, setActiveTeam, teams } = useTeamStore();
+  const { startLoadingTeams, setActiveTeam, startDeleting, teams } = useTeamStore();
   const { openModal } = useUiStore()
 
   useEffect(() => {
     startLoadingTeams()
-  }, [])
+  }, [teams])
 
   const onClickCreate = () => {
     setActiveTeam({
@@ -21,6 +21,10 @@ export const TeamsManage = () => {
       leaderName: ''
     })
     openModal()
+  }
+
+  const onClickDelete = (userId) => {
+    startDeleting(userId)
   }
 
   return (
@@ -34,6 +38,15 @@ export const TeamsManage = () => {
         return (
           <div className="accordion accordion-flush" id={`accordionFlush${index}`}>
             <div className="accordion-item">
+              <button type="button" className='btn bg-transparent' onClick={() => {
+                //openModal()
+                //onSelect(element)
+              }}>
+                <i className="fas fa-pencil-alt text-info"></i></button>
+              <button type="button" className='btn bg-transparent' onClick={() => {
+                onClickDelete(element._id)
+              }}>
+                <i className="far fa-trash-alt text-danger"></i></button>
               <h2 className="accordion-header" id={`flush-heading${index}`}>
                 <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#flush-collapse${index}`} aria-expanded="false" aria-controls={`flush-collapse${index}`}>
                   <div className="col-lg-8 col-md-8 col-12">
