@@ -91,11 +91,11 @@ export const TeamsManage = () => {
                             <div className="candidate-list-details">
                               <div className="candidate-list-info">
                                 <div className="candidate-list-title">
-                                  <h5 className="mb-0">{element.memberId.name}</h5>
+                                  <h5 className="mb-0">{element.name}</h5>
                                 </div>
                                 <div className="candidate-list-option">
                                   <ul className="list-unstyled">
-                                    <li><i className="fa fa-envelope pr-1"></i>{element.memberId.email}</li>
+                                    <li><i className="fa fa-envelope pr-1"></i>{element.email}</li>
                                   </ul>
                                 </div>
                               </div>

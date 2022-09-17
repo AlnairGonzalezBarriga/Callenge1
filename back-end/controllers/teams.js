@@ -3,7 +3,7 @@ const Team = require('../models/teams')
 
 const getTeams = async (req, res = response) => {
 
-    const teams = await Team.find().populate('teamMembers.memberId', 'name email')
+    const teams = await Team.find().populate('teamMembers', 'name email')
 
     res.json({
         ok: true,
@@ -17,7 +17,7 @@ const createTeam = async (req, res = response) => {
 
     try {
 
-        team.teamMembers = [{ memberId: req.uid }]
+        team.teamMembers = req.uid
 
         const newTeam = await team.save()
 
@@ -54,7 +54,7 @@ const editTeam = async (req, res = response) => {
             ...req.body
         }
 
-        const teamActualizado = await Team.findByIdAndUpdate( teamId, nuevoTeam, {new: true} )
+        const teamActualizado = await Team.findByIdAndUpdate(teamId, nuevoTeam, { new: true })
 
         res.json({
             ok: true,
@@ -86,7 +86,7 @@ const deleteTeam = async (req, res = response) => {
             })
         }
 
-        await Team.findByIdAndDelete( teamId )
+        await Team.findByIdAndDelete(teamId)
 
         res.json({
             ok: true
@@ -117,11 +117,22 @@ const addTeamMember = async (req, res = response) => {
             })
         }
 
-        const teamActualizado = await Team.findByIdAndUpdate( teamId, 
-            { $push: { teamMembers : { 
-                  "memberId" : addId
-              }  } }, 
-            {new: true} )
+        team.teamMembers.map((function (element) {
+
+            if (element.toString() === addId) {
+                res.status(500).json({
+                    ok: false,
+                    msg: 'Error, el usuario ya existe en este equipo'
+                })
+            }
+        }))
+        const teamActualizado = await Team.findByIdAndUpdate(teamId,
+            {
+                $push: {
+                    teamMembers: addId
+                }
+            },
+            { new: true })
 
         res.json({
             ok: true,
@@ -153,11 +164,13 @@ const deleteTeamMember = async (req, res = response) => {
             })
         }
 
-        const teamActualizado = await Team.findByIdAndUpdate( teamId, 
-            { $pull: { teamMembers : { 
-                  "memberId" : deleteId
-              }  } }, 
-            {new: true} )
+        const teamActualizado = await Team.findByIdAndUpdate(teamId,
+            {
+                $pull: {
+                    teamMembers: deleteId
+                }
+            },
+            { new: true })
 
         res.json({
             ok: true,

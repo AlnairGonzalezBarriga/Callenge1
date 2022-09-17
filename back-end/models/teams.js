@@ -15,11 +15,8 @@ const TeamSchema = Schema({
         required: true
     },
     teamMembers: [{
-        memberId: {
-            type: Schema.Types.ObjectId,
-            ref: 'Usuario',
-            required: true
-        }
+        type: Schema.Types.ObjectId,
+        ref: 'Usuario'
     }]
 })
 
