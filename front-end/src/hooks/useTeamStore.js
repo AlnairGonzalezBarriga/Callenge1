@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import challengeApi from "../api/challengeApi"
 import Swal from 'sweetalert2'
 
-import { onEndUpdate, onLoadTeams, onSetActiveTeam } from "../store/teamSlice"
+import { onEndUpdate, onLoadTeams, onCreateTeam, onUpdateTeam, onSetActiveTeam, onStartUpdate, onDeleteTeam } from "../store/teamSlice"
 
 export const useTeamStore = () => {
 
@@ -21,27 +21,35 @@ export const useTeamStore = () => {
 
     const startUpload = async (team, teamId) => {
         if (isUpdating === true) {
-            /* try {
-                await challengeApi.put((`/auth/${userId}`), user)
+            try {
+                await challengeApi.put((`/teams/${teamId}`), team)
+                dispatch(onUpdateTeam(team))
                 dispatch(onEndUpdate())
+                Swal.fire({ icon: 'success', title: 'Equipo editado con exito' })
                 return;
             } catch (error) {
                 console.log(error)
-            } */
+            }
         } else {
             try {
-                await challengeApi.post('/teams', team)
-                Swal.fire({icon: 'success', title: 'Equipo creado con exito'})
+                const { data } = await challengeApi.post('/teams', team)
+                dispatch(onCreateTeam({...team, _id: data.team._id}))
+                Swal.fire({ icon: 'success', title: 'Equipo creado con exito' })
             } catch (error) {
                 console.log(error)
             }
         }
     }
 
+    const setUpdateStatus = () => {
+        dispatch(onStartUpdate())
+    }
+
     const startDeleting = async (userId) => {
         try {
             await challengeApi.delete((`/teams/${userId}`))
-            Swal.fire({icon: 'success', title: 'Equipo eliminado con exito'})
+            dispatch(onDeleteTeam())
+            Swal.fire({ icon: 'success', title: 'Equipo eliminado con exito' })
         } catch (error) {
             console.log(error)
         }
@@ -60,6 +68,7 @@ export const useTeamStore = () => {
         //Metodos
         startLoadingTeams,
         startUpload,
+        setUpdateStatus,
         startDeleting,
         setActiveTeam
 

@@ -27,7 +27,7 @@ export const userSlice = createSlice({
             state.activeUser = payload
         },
         onCreateUser: (state, {payload}) => {
-            state.users.push = payload
+            state.users.push(payload)
             state.activeUser = null
         },
         onStartUpdate: (state) => {

@@ -8,20 +8,26 @@ import { TeamsModal } from './TeamsModal';
 
 export const TeamsManage = () => {
 
-  const { startLoadingTeams, setActiveTeam, startDeleting, teams } = useTeamStore();
+  const { startLoadingTeams, setActiveTeam, startDeleting, setUpdateStatus, teams } = useTeamStore();
   const { openModal } = useUiStore()
 
   useEffect(() => {
     startLoadingTeams()
-  }, [teams])
+  }, [])
 
   const onClickCreate = () => {
     setActiveTeam({
       accountName: '',
       teamClient: '',
-      leaderName: ''
+      leaderName: '',
+      teamMembers: []
     })
     openModal()
+  }
+
+  const onSelect = (team) => {
+    setUpdateStatus()
+    setActiveTeam(team)
   }
 
   const onClickDelete = (userId) => {
@@ -54,11 +60,12 @@ export const TeamsManage = () => {
           <div className="accordion accordion-flush" id={`accordionFlush${index}`}>
             <div className="accordion-item">
               <button type="button" className='btn bg-transparent' onClick={() => {
-                //openModal()
-                //onSelect(element)
+                openModal()
+                onSelect(element)
               }}>
                 <i className="fas fa-pencil-alt text-info"></i></button>
               <button type="button" className='btn bg-transparent' onClick={() => {
+                onSelect(element)
                 onClickDelete(element._id)
               }}>
                 <i className="far fa-trash-alt text-danger"></i></button>
@@ -72,7 +79,6 @@ export const TeamsManage = () => {
                 </button>
               </h2>
               <div id={`flush-collapse${index}`} className="accordion-collapse collapse" aria-labelledby={`flush-heading${index}`} data-bs-parent={`#accordionFlush${index}`}>
-
                 <table className="table manage-candidates-top mb-0">
                   <thead>
                     <tr>
@@ -83,7 +89,8 @@ export const TeamsManage = () => {
                       </th>
                     </tr>
                   </thead>
-                  {element.teamMembers.map(function (element, index) {
+                  { 
+                  element.teamMembers.map(function (memberElement, index) {
                     return (
                       <tbody>
                         <tr className="candidates-list">
@@ -91,11 +98,11 @@ export const TeamsManage = () => {
                             <div className="candidate-list-details">
                               <div className="candidate-list-info">
                                 <div className="candidate-list-title">
-                                  <h5 className="mb-0">{element.name}</h5>
+                                  <h5 className="mb-0">{memberElement.name}</h5>
                                 </div>
                                 <div className="candidate-list-option">
                                   <ul className="list-unstyled">
-                                    <li><i className="fa fa-envelope pr-1"></i>{element.email}</li>
+                                    <li><i className="fa fa-envelope pr-1"></i>{memberElement.email}</li>
                                   </ul>
                                 </div>
                               </div>
@@ -114,7 +121,8 @@ export const TeamsManage = () => {
                         </tr>
                       </tbody>
                     )
-                  })}
+                  })
+                  }
                 </table>
               </div>
             </div>

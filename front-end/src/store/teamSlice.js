@@ -22,8 +22,21 @@ export const teamSlice = createSlice({
         onSetActiveTeam: (state, payload) => {
             state.activeTeam = payload
         },
-        onCreateUser: (state, {payload}) => {
-            state.teams.push = payload
+        onCreateTeam: (state, { payload }) => {
+            state.teams.push(payload)
+            state.activeTeam = null
+        },
+        onUpdateTeam: (state, { payload }) => {
+            state.teams = state.teams.map(team => {
+                if (team._id === payload._id) {
+                    return payload
+                }
+                state.activeTeam = null
+                return team
+            })            
+        },
+        onDeleteTeam: (state) => {
+            state.teams = state.teams.filter(team => team._id !== state.activeTeam._id)
             state.activeTeam = null
         },
         onStartUpdate: (state) => {
@@ -35,4 +48,11 @@ export const teamSlice = createSlice({
     }
 })
 
-export const { onLoadTeams, onSetActiveTeam, onStartUpdate, onEndUpdate } = teamSlice.actions;
+export const {
+    onLoadTeams,
+    onSetActiveTeam,
+    onCreateTeam,
+    onUpdateTeam,
+    onDeleteTeam,
+    onStartUpdate,
+    onEndUpdate } = teamSlice.actions;
