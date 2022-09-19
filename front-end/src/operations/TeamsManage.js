@@ -65,7 +65,6 @@ export const TeamsManage = () => {
               }}>
                 <i className="fas fa-pencil-alt text-info"></i></button>
               <button type="button" className='btn bg-transparent' onClick={() => {
-                onSelect(element)
                 onClickDelete(element._id)
               }}>
                 <i className="far fa-trash-alt text-danger"></i></button>

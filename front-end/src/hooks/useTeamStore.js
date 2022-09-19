@@ -45,10 +45,10 @@ export const useTeamStore = () => {
         dispatch(onStartUpdate())
     }
 
-    const startDeleting = async (userId) => {
+    const startDeleting = async (teamId) => {
         try {
-            await challengeApi.delete((`/teams/${userId}`))
-            dispatch(onDeleteTeam())
+            await challengeApi.delete((`/teams/${teamId}`))
+            dispatch(onDeleteTeam(teamId))
             Swal.fire({ icon: 'success', title: 'Equipo eliminado con exito' })
         } catch (error) {
             console.log(error)

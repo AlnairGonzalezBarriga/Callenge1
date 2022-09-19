@@ -35,8 +35,8 @@ export const teamSlice = createSlice({
                 return team
             })            
         },
-        onDeleteTeam: (state) => {
-            state.teams = state.teams.filter(team => team._id !== state.activeTeam._id)
+        onDeleteTeam: (state, { payload }) => {
+            state.teams = state.teams.filter(team => team._id !== payload)
             state.activeTeam = null
         },
         onStartUpdate: (state) => {
