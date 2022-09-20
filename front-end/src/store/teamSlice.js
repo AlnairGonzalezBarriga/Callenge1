@@ -33,7 +33,7 @@ export const teamSlice = createSlice({
                 }
                 state.activeTeam = null
                 return team
-            })            
+            })
         },
         onDeleteTeam: (state, { payload }) => {
             state.teams = state.teams.filter(team => team._id !== payload)
@@ -45,6 +45,14 @@ export const teamSlice = createSlice({
         onEndUpdate: (state) => {
             state.isUpdating = false
         },
+        onUpdateTeamMember: (state, { payload }) => {
+            state.teams = state.teams.map(team => {
+                if (team._id === payload._id) {
+                    return payload
+                }
+                return team
+            })
+        },
     }
 })
 
@@ -55,4 +63,5 @@ export const {
     onUpdateTeam,
     onDeleteTeam,
     onStartUpdate,
-    onEndUpdate } = teamSlice.actions;
+    onEndUpdate,
+    onUpdateTeamMember } = teamSlice.actions;

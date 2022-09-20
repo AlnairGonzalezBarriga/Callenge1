@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import challengeApi from "../api/challengeApi"
 import Swal from 'sweetalert2'
 
-import { onEndUpdate, onLoadTeams, onCreateTeam, onUpdateTeam, onSetActiveTeam, onStartUpdate, onDeleteTeam } from "../store/teamSlice"
+import { onEndUpdate, onLoadTeams, onCreateTeam, onUpdateTeam, onSetActiveTeam, onStartUpdate, onDeleteTeam, onUpdateTeamMember } from "../store/teamSlice"
 
 export const useTeamStore = () => {
 
@@ -62,7 +62,7 @@ export const useTeamStore = () => {
     const startAddingMember = async (teamId, memberId) => {
         try {
             const {data} = await challengeApi.put((`/teams/addTeamMember/${teamId}`), {addId: memberId})
-            dispatch(onUpdateTeam({...data.team, teamMembers: data.team.teamMembers}))
+            dispatch(onUpdateTeamMember({...data.team, teamMembers: data.team.teamMembers}))
             Swal.fire({ icon: 'success', title: 'Equipo editado con exito' })
         } catch (error) {
             console.log(error)
