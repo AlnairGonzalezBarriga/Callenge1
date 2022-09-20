@@ -64,6 +64,7 @@ export const useTeamStore = () => {
         try {
             const {data} = await challengeApi.put((`/teams/deleteTeamMember/${teamId}`), {deleteId: memberId})
             dispatch(onUpdateTeam({...data.team, teamMembers: data.team.teamMembers}))
+            Swal.fire({ icon: 'success', title: 'Equipo editado con exito' })
         } catch (error) {
             console.log(error)
         }
