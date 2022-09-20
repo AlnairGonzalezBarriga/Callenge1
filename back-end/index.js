@@ -15,6 +15,7 @@ app.use( express.json() )
 
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/teams', require('./routes/teams'))
+app.use('/api-docs', require('./routes/api-docs'))
 
 app.listen(process.env.PORT, () =>{
     console.log(`Back-end corriendo ${process.env.PORT}`);
