@@ -5,12 +5,13 @@ import { useUiStore } from '../hooks/useUiStore';
 
 import './styles/userStyle.css'
 import { TeamsModal } from './TeamsModal';
+import { UserListModal } from './UserListModal';
 
 export const TeamsManage = () => {
 
   const { startLoadingTeams, setActiveTeam, startDeleting, setUpdateStatus,
     startAddingMember, startDeletingMember, teams } = useTeamStore();
-  const { openModal } = useUiStore()
+  const { openModal, openUserListModal } = useUiStore()
 
   useEffect(() => {
     startLoadingTeams()
@@ -89,7 +90,10 @@ export const TeamsManage = () => {
                       <th>Miembros</th>
                       <th className="action text-right">Action</th>
                       <th className="action text-right">
-                        <button type='button' className='btn'><i className="fa fa-plus"></i></button>
+                        <button type='button' className='btn' onClick={() =>{
+                          openUserListModal()
+                          setActiveTeam(element)
+                        }}><i className="fa fa-plus"></i></button>
                       </th>
                     </tr>
                   </thead>
@@ -145,6 +149,7 @@ export const TeamsManage = () => {
         <br></br>
       </div>
       <TeamsModal />
+      <UserListModal/>
     </div>
   )
 }

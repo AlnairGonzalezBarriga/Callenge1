@@ -105,7 +105,6 @@ const addTeamMember = async (req, res = response) => {
 
     const teamId = req.params.id
     const addId = req.body.addId
-
     try {
 
         const team = await Team.findById(teamId)
@@ -131,7 +130,7 @@ const addTeamMember = async (req, res = response) => {
                         teamMembers: addId
                     }
                 },
-                { new: true })
+                { new: true }).populate('teamMembers', 'name email')
     
             res.json({
                 ok: true,

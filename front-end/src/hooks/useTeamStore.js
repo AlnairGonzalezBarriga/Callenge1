@@ -29,6 +29,7 @@ export const useTeamStore = () => {
                 return;
             } catch (error) {
                 console.log(error)
+                Swal.fire('Error', error.response.data.msg, 'error')
             }
         } else {
             try {
@@ -37,6 +38,7 @@ export const useTeamStore = () => {
                 Swal.fire({ icon: 'success', title: 'Equipo creado con exito' })
             } catch (error) {
                 console.log(error)
+                Swal.fire('Error', error.response.data.msg, 'error')
             }
         }
     }
@@ -52,12 +54,20 @@ export const useTeamStore = () => {
             Swal.fire({ icon: 'success', title: 'Equipo eliminado con exito' })
         } catch (error) {
             console.log(error)
+            Swal.fire('Error', error.response.data.msg, 'error')
         }
 
     }
 
-    const startAddingMember = async () => {
-
+    const startAddingMember = async (teamId, memberId) => {
+        try {
+            const {data} = await challengeApi.put((`/teams/addTeamMember/${teamId}`), {addId: memberId})
+            dispatch(onUpdateTeam({...data.team, teamMembers: data.team.teamMembers}))
+            Swal.fire({ icon: 'success', title: 'Equipo editado con exito' })
+        } catch (error) {
+            console.log(error)
+            Swal.fire('Error', error.response.data.msg, 'error')
+        }
     }
 
     const startDeletingMember = async (teamId, memberId) => {
@@ -67,6 +77,7 @@ export const useTeamStore = () => {
             Swal.fire({ icon: 'success', title: 'Equipo editado con exito' })
         } catch (error) {
             console.log(error)
+            Swal.fire('Error', error.response.data.msg, 'error')
         }
     }
 
