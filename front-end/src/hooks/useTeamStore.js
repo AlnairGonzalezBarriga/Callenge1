@@ -56,6 +56,19 @@ export const useTeamStore = () => {
 
     }
 
+    const startAddingMember = async () => {
+
+    }
+
+    const startDeletingMember = async (teamId, memberId) => {
+        try {
+            const {data} = await challengeApi.put((`/teams/deleteTeamMember/${teamId}`), {deleteId: memberId})
+            dispatch(onUpdateTeam({...data.team, teamMembers: data.team.teamMembers}))
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     const setActiveTeam = (activeTeam) => {
         dispatch(onSetActiveTeam(activeTeam))
     }
@@ -70,6 +83,8 @@ export const useTeamStore = () => {
         startUpload,
         setUpdateStatus,
         startDeleting,
+        startAddingMember,
+        startDeletingMember,
         setActiveTeam
 
     }

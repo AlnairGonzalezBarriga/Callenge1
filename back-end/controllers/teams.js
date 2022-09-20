@@ -117,27 +117,32 @@ const addTeamMember = async (req, res = response) => {
             })
         }
 
+        let member = false
         team.teamMembers.map((function (element) {
-
             if (element.toString() === addId) {
-                res.status(500).json({
-                    ok: false,
-                    msg: 'Error, el usuario ya existe en este equipo'
-                })
+                member = true  
             }
         }))
-        const teamActualizado = await Team.findByIdAndUpdate(teamId,
-            {
-                $push: {
-                    teamMembers: addId
-                }
-            },
-            { new: true })
-
-        res.json({
-            ok: true,
-            team: teamActualizado
-        })
+        
+        if(member !== true){
+            const teamActualizado = await Team.findByIdAndUpdate(teamId,
+                {
+                    $push: {
+                        teamMembers: addId
+                    }
+                },
+                { new: true })
+    
+            res.json({
+                ok: true,
+                team: teamActualizado
+            })
+        }else{
+            res.status(500).json({
+                ok: false,
+                msg: 'Error, ese usuario existe en el equipo'
+            })
+        }        
 
     } catch (error) {
         console.log(error)
@@ -170,8 +175,8 @@ const deleteTeamMember = async (req, res = response) => {
                     teamMembers: deleteId
                 }
             },
-            { new: true })
-
+            { new: true }).populate('teamMembers', 'name email')
+            
         res.json({
             ok: true,
             team: teamActualizado

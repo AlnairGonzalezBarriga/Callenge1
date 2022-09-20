@@ -8,7 +8,8 @@ import { TeamsModal } from './TeamsModal';
 
 export const TeamsManage = () => {
 
-  const { startLoadingTeams, setActiveTeam, startDeleting, setUpdateStatus, teams } = useTeamStore();
+  const { startLoadingTeams, setActiveTeam, startDeleting, setUpdateStatus,
+    startAddingMember, startDeletingMember, teams } = useTeamStore();
   const { openModal } = useUiStore()
 
   useEffect(() => {
@@ -38,7 +39,7 @@ export const TeamsManage = () => {
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',      
+      cancelButtonColor: '#d33',
       confirmButtonText: 'Confirmar',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
@@ -46,6 +47,10 @@ export const TeamsManage = () => {
         startDeleting(userId)
       }
     })
+  }
+
+  const onClickDeleteMember = (teamId, memberId) => {
+    startDeletingMember(teamId, memberId)    
   }
 
   return (
@@ -88,39 +93,37 @@ export const TeamsManage = () => {
                       </th>
                     </tr>
                   </thead>
-                  { 
-                  element.teamMembers.map(function (memberElement, index) {
-                    return (
-                      <tbody>
-                        <tr className="candidates-list">
-                          <td className="title">
-                            <div className="candidate-list-details">
-                              <div className="candidate-list-info">
-                                <div className="candidate-list-title">
-                                  <h5 className="mb-0">{memberElement.name}</h5>
-                                </div>
-                                <div className="candidate-list-option">
-                                  <ul className="list-unstyled">
-                                    <li><i className="fa fa-envelope pr-1"></i>{memberElement.email}</li>
-                                  </ul>
+                  {
+                    element.teamMembers.map(function (memberElement, index) {
+                      return (
+                        <tbody>
+                          <tr className="candidates-list">
+                            <td className="title">
+                              <div className="candidate-list-details">
+                                <div className="candidate-list-info">
+                                  <div className="candidate-list-title">
+                                    <h5 className="mb-0">{memberElement.name}</h5>
+                                  </div>
+                                  <div className="candidate-list-option">
+                                    <ul className="list-unstyled">
+                                      <li><i className="fa fa-envelope pr-1"></i>{memberElement.email}</li>
+                                    </ul>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          </td>
-                          <td className="candidate-list-favourite-time text-center">
-                            <ul className="list-unstyled mb-0 d-flex">
-                              <li><button type="button" className='btn bg-transparent' onClick={() => {
-                              }}>
-                                <i className="fas fa-eye text-primary"></i></button></li>
-                              <li><button type="button" className='btn bg-transparent' onClick={() => {
-                              }}>
-                                <i className="far fa-trash-alt text-danger"></i></button></li>
-                            </ul>
-                          </td>
-                        </tr>
-                      </tbody>
-                    )
-                  })
+                            </td>
+                            <td className="candidate-list-favourite-time text-center">
+                              <ul className="list-unstyled mb-0 d-flex">
+                                <li><button type="button" className='btn bg-transparent' onClick={() => {
+                                  onClickDeleteMember(element._id, memberElement._id)
+                                }}>
+                                  <i className="far fa-trash-alt text-danger"></i></button></li>
+                              </ul>
+                            </td>
+                          </tr>
+                        </tbody>
+                      )
+                    })
                   }
                 </table>
               </div>
