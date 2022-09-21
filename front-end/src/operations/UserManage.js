@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import Swal from 'sweetalert2'
 import { useAuthStore } from '../hooks/useAuthStore'
 import { useUiStore } from '../hooks/useUiStore';
 
@@ -31,7 +32,22 @@ export const UserManage = () => {
   }
 
   const onClickDelete = (userId) => {
-    startDeleting(userId)
+
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: "No podras revertir los cambio!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        startDeleting(userId)
+      }
+    })
+    
   }
 
   return (

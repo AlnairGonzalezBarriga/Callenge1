@@ -30,6 +30,19 @@ export const userSlice = createSlice({
             state.users.push(payload)
             state.activeUser = null
         },
+        onUpdateUser: (state, { payload }) => {
+            state.users = state.users.map(user => {
+                if (user._id === payload._id) {
+                    return payload
+                }
+                state.activeUser = null
+                return user
+            })
+        },
+        onDeleteUser: (state, { payload }) => {
+            state.users = state.users.filter(user => user._id !== payload)
+            state.activeTeam = null
+        },
         onStartUpdate: (state) => {
             state.isUpdating = true
         },
@@ -39,4 +52,12 @@ export const userSlice = createSlice({
     }
 })
 
-export const { onLoadUsers, onLogoutUsers, onSetActiveUser, onCreateUser, onStartUpdate, onEndUpdate } = userSlice.actions;
+export const { 
+    onLoadUsers, 
+    onLogoutUsers, 
+    onSetActiveUser, 
+    onCreateUser, 
+    onUpdateUser,
+    onDeleteUser,
+    onStartUpdate, 
+    onEndUpdate } = userSlice.actions;

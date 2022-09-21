@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux"
 import challengeApi from "../api/challengeApi"
+import Swal from 'sweetalert2'
 import { clearErrorMessage, onChecking, onLogin, onLogout } from "../store/authSlice"
-import { onLoadUsers, onLogoutUsers, onSetActiveUser, onStartUpdate, onEndUpdate, onCreateUser } from '../store/userSlice'
+import { onLoadUsers, onLogoutUsers, onSetActiveUser, onStartUpdate, onEndUpdate, onCreateUser, onUpdateUser, onDeleteUser } from '../store/userSlice'
 
 
 export const useAuthStore = () => {
@@ -69,16 +70,22 @@ export const useAuthStore = () => {
         if (isUpdating === true) {
             try {
                 await challengeApi.put((`/auth/${userId}`), user)
+                dispatch(onUpdateUser(user))
                 dispatch(onEndUpdate())
+                Swal.fire({ icon: 'success', title: 'Usuario editado con exito' })
                 return;
             } catch (error) {
                 console.log(error)
+                Swal.fire('Error', error.response.data.msg, 'error')
             }
         } else {
             try {
-                await challengeApi.post('/auth/new', user)
+                const { data } = await challengeApi.post('/auth/new', user)
+                dispatch(onCreateUser({...user, _id: data.uid}))
+                Swal.fire({ icon: 'success', title: 'Usuario creado con exito' })
             } catch (error) {
                 console.log(error)
+                Swal.fire('Error', error.response.data.msg, 'error')
             }
         }
     }
@@ -86,8 +93,11 @@ export const useAuthStore = () => {
     const startDeleting = async (userId) => {
         try {
             await challengeApi.delete((`/auth/${userId}`))
+            dispatch(onDeleteUser(userId))
+            Swal.fire({ icon: 'success', title: 'Usuario eliminado con exito' })
         } catch (error) {
             console.log(error)
+            Swal.fire('Error', error.response.data.msg, 'error')
         }
 
     }

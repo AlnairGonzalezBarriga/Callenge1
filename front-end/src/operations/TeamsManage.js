@@ -71,9 +71,11 @@ export const TeamsManage = () => {
 
   return (
     <div className="container profile-page mt-3 mb-4 user-page">
-      <div className='container pt-4'>
+      <div className='d-flex flex-row container pt-4'>
         <h1>Cuentas</h1>
+        <div className="float-end">
         <button type='button' className='btn btn-primary rounded-circle' onClick={() => { onClickCreate() }}><i className="fa fa-plus"></i></button>
+        </div>
       </div>
       <hr />
       {teams.map(function (element, index) {
