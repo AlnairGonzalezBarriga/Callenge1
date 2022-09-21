@@ -15,9 +15,7 @@ const createTeam = async (req, res = response) => {
 
     const team = new Team(req.body)
 
-    try {
-
-        team.teamMembers = req.uid
+    try {        
 
         const newTeam = await team.save()
 

@@ -9,8 +9,8 @@ import { UserListModal } from './UserListModal';
 
 export const TeamsManage = () => {
 
-  const { startLoadingTeams, setActiveTeam, startDeleting, setUpdateStatus,
-    startAddingMember, startDeletingMember, teams } = useTeamStore();
+  const { startLoadingTeams, setActiveTeam, startDeleting, setUpdateStatus
+    , startDeletingMember, teams } = useTeamStore();
   const { openModal, openUserListModal } = useUiStore()
 
   useEffect(() => {
@@ -35,8 +35,8 @@ export const TeamsManage = () => {
   const onClickDelete = (userId) => {
 
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: 'Estas seguro?',
+      text: "No podras revertir los cambio!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -51,7 +51,22 @@ export const TeamsManage = () => {
   }
 
   const onClickDeleteMember = (teamId, memberId) => {
-    startDeletingMember(teamId, memberId)    
+
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: "No podras revertir los cambio!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        startDeletingMember(teamId, memberId)
+      }
+    })
+
   }
 
   return (
@@ -90,7 +105,7 @@ export const TeamsManage = () => {
                       <th>Miembros</th>
                       <th className="action text-right">Action</th>
                       <th className="action text-right">
-                        <button type='button' className='btn' onClick={() =>{
+                        <button type='button' className='btn' onClick={() => {
                           openUserListModal()
                           setActiveTeam(element)
                         }}><i className="fa fa-plus"></i></button>
@@ -149,7 +164,7 @@ export const TeamsManage = () => {
         <br></br>
       </div>
       <TeamsModal />
-      <UserListModal/>
+      <UserListModal />
     </div>
   )
 }
