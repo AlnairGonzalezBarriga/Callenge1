@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+/* import { render, screen } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { AuthContext } from '../src/auth/context/AuthContext'
 import { PrivateRoute } from '../src/router/PrivateRoute'
@@ -25,4 +25,4 @@ describe('Pruebas en PublicRouter', () => {
         expect(screen.getByText('Ruta privada')).toBeTruthy()
     })
 
-})
+}) */

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+/* import { render, screen } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { AuthContext } from '../src/auth/context/AuthContext'
 import { PublicRoute } from '../src/router/PublicRoute'
@@ -46,4 +46,4 @@ describe('Pruebas en PublicRouter', () => {
         )
         expect(screen.getByText('Ruta accountManage')).toBeTruthy()
     })
-})
+}) */

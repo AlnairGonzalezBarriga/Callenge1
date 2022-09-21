@@ -23,7 +23,7 @@ export const UserModal = () => {
 
     const { isModalOpen, closeModal } = useUiStore()
 
-    const { activeUser, startRegister, startUpdate } = useAuthStore()
+    const { activeUser, startUpdate } = useAuthStore()
 
     const [formValues, setFormValues] = useState({
         name: 'Alnair Gonzalez',
@@ -82,6 +82,7 @@ export const UserModal = () => {
                                             name='name'
                                             value={formValues.name}
                                             onChange={onInputChange}
+                                            required="required"
                                         />
                                     </div>
                                     <div class="row">
@@ -94,6 +95,7 @@ export const UserModal = () => {
                                                 name='email'
                                                 value={formValues.email}
                                                 onChange={onInputChange}
+                                                required="required"
                                             />
 
                                         </div>
@@ -108,6 +110,7 @@ export const UserModal = () => {
                                                 name='password'
                                                 value={formValues.password}
                                                 onChange={onInputChange}
+                                                required="required"
                                             />
                                         </div>
                                     </div>

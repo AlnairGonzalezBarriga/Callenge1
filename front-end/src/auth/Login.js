@@ -1,8 +1,5 @@
-import React, { useContext, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect } from 'react'
 import { useForm } from '../hooks/useForm';
-import { AuthContext } from './context/AuthContext';
-import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2'
 
 import './styles/loginStyles.css'
@@ -44,6 +41,7 @@ const Login = () => {
           name='loginEmail'
           value={ loginEmail }
           onChange={ onInputChange }
+          required="required"
           />
         </div>
 
@@ -55,6 +53,7 @@ const Login = () => {
           name='loginPassword'
           value={ loginPassword }
           onChange={ onInputChange }
+          required="required"
           />
         </div>
 

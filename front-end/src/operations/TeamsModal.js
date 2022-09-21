@@ -81,6 +81,7 @@ export const TeamsModal = () => {
                                             name='accountName'
                                             value={formValues.accountName}
                                             onChange={onInputChange}
+                                            required="required"
                                         />
                                     </div>
                                     <div class="row">
@@ -93,6 +94,7 @@ export const TeamsModal = () => {
                                                 name='teamClient'
                                                 value={formValues.teamClient}
                                                 onChange={onInputChange}
+                                                required="required"
                                             />
 
                                         </div>
@@ -107,6 +109,7 @@ export const TeamsModal = () => {
                                                 name='leaderName'
                                                 value={formValues.leaderName}
                                                 onChange={onInputChange}
+                                                required="required"
                                             />
                                         </div>
                                     </div>

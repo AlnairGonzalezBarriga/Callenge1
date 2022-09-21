@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Modal from 'react-modal'
 import { useAuthStore } from '../hooks/useAuthStore';
 import { useTeamStore } from '../hooks/useTeamStore';
