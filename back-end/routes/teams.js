@@ -36,7 +36,7 @@ router.use(validarJWT)
  *              properties:
  *                  id:
  *                      type: ObjectId
- *                      description: The member id
+ *                      description: The member id, takes reference from the User model
  *                      example: 0
  */
 
@@ -48,6 +48,10 @@ router.use(validarJWT)
  *     description: Get a list of the Teams it populates teamMembers name and email
  *     produces: 
  *         - application/json
+ *     parameters:
+ *          - in: header
+ *            name: x-token
+ *            description: Valid JWT
  *     responses:
  *       200:
  *         description: Returns a list of Teams
@@ -74,7 +78,7 @@ router.use(validarJWT)
  *                         example: John Doe
  *                       accountName:
  *                         type: string
- *                         example: Leanne Graham
+ *                         example: Appoinment app
  *                       leaderName:
  *                         type: string
  *                         example: John Doe
@@ -102,6 +106,12 @@ router.get('/', getTeams)
  *   post:
  *     summary : Create a team
  *     description: Use this request to create a Team
+ *     produces: 
+ *         - application/json
+ *     parameters:
+ *          - in: header
+ *            name: x-token
+ *            description: Valid JWT
  *     requestBody:
  *         required: true 
  *         content:
@@ -116,7 +126,7 @@ router.get('/', getTeams)
  *                     accountName: 
  *                       type: string
  *                       description: The account name
- *                       example: John Doe
+ *                       example: Appoinment app
  *                     leaderName: 
  *                       type: string
  *                       description: The team manager
@@ -147,7 +157,7 @@ router.get('/', getTeams)
  *                         example: John Doe
  *                       accountName:
  *                         type: string
- *                         example: Leanne Graham
+ *                         example: Appoinment app
  *                       leaderName:
  *                         type: string
  *                         example: John Doe
@@ -172,6 +182,12 @@ router.post(
  *   put:
  *     summary : Update a team
  *     description: Use this request to update a Team
+ *     produces: 
+ *         - application/json
+ *     parameters:
+ *          - in: header
+ *            name: x-token
+ *            description: Valid JWT
  *     requestBody:
  *         required: true 
  *         content:
@@ -186,7 +202,7 @@ router.post(
  *                     accountName: 
  *                       type: string
  *                       description: The account name
- *                       example: John Doe
+ *                       example: Appoinment app
  *                     leaderName: 
  *                       type: string
  *                       description: The team manager
@@ -217,7 +233,7 @@ router.post(
  *                         example: John Doe
  *                       accountName:
  *                         type: string
- *                         example: Leanne Graham
+ *                         example: Appoinment app
  *                       leaderName:
  *                         type: string
  *                         example: John Doe
@@ -250,6 +266,12 @@ router.put('/:id',
  *   delete:
  *     summary : Update a team
  *     description: Use this request to update a Team
+ *     produces: 
+ *         - application/json
+ *     parameters:
+ *          - in: header
+ *            name: x-token
+ *            description: Valid JWT
  *     responses:
  *       200:
  *         description: Returns a list of Teams

@@ -11,10 +11,16 @@ const options = {
       title: 'Challenge 1',
       version: '1.0.0',
     },
-  },
+    servers: [
+      {
+        url: 'http://localhost:4000',
+        description: 'Development server',
+      },
+    ],
+  },  
   basePath: "/",
 
-  apis: ["./routes/teams.js"], 
+  apis: ["./routes/teams.js"],
 };
 
 const swaggerDocs = swaggerJsdoc(options);
